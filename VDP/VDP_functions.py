@@ -1,5 +1,4 @@
 # This file contains various functions related to particle physics calculations, particularly focusing on the Bethe-Bloch formula and related concepts.
-import numpy as np
 import math
 # Constants
 import VDP_constants as const
@@ -12,16 +11,16 @@ def f_coul(Z):
 # Separate helper function for the common factor of the Bethe-Bloch formula
 def bethe_bloch_common_factor():
     # Calculate the common factor
-    K = 2 * np.pi * const.N_A * const.r_e**2 * const.m_e
+    K = 2 * math.pi * const.N_A * const.r_e**2 * const.m_e
     return K
 
 # Bethe-Bloch formula for the energy loss
 def bethe_bloch(Z_det, A_det, rho_det, Z_projectile, beta_projectile, W_max, I_potential, density_correction, coulomb_correction):
     # Calculate beta_gamma
-    beta_gamma = beta_projectile / np.sqrt(1 - beta_projectile**2)
+    beta_gamma = beta_projectile / math.sqrt(1 - beta_projectile**2)
     # Calculate common factor
-    K = 2 * np.pi * const.N_A * const.r_e**2 * const.m_e
-    dE = K * Z_det / A_det * rho_det * Z_projectile**2 / beta_projectile**2 * (np.log(2 * const.m_e * beta_gamma**2 * W_max / I_potential**2) - 2 * beta_projectile**2 - density_correction - 2 * coulomb_correction/Z_det)
+    K = 2 * math.pi * const.N_A * const.r_e**2 * const.m_e
+    dE = K * Z_det / A_det * rho_det * Z_projectile**2 / beta_projectile**2 * (math.log(2 * const.m_e * beta_gamma**2 * W_max / I_potential**2) - 2 * beta_projectile**2 - density_correction - 2 * coulomb_correction/Z_det)
     return dE
 
 # number of atoms in 1 cm^3
@@ -37,9 +36,9 @@ def phi_rad(Z, E0, shield_ind):
     cf = 4 * Z**2 * const.r_e**2 * const.alpha
     # Calculate the radiative correction
     if shield_ind == 0:
-        phi = cf * (np.log(2 * E0 / const.m_e) - 1/3 - f_coul(Z))
+        phi = cf * (math.log(2 * E0 / const.m_e) - 1/3 - f_coul(Z))
     elif shield_ind == 1:
-        phi = cf * (np.log(183*Z**(-1/3)) + 1/18 - f_coul(Z))
+        phi = cf * (math.log(183*Z**(-1/3)) + 1/18 - f_coul(Z))
     return phi
 
 # Function for the energy loss
@@ -57,7 +56,7 @@ def E_crit_approx(Z):
 # Simplified radiation length function
 def L_rad(Z, A):
     # Calculate the radiation length
-    X0 = 716.4 * A / (Z*(Z+1) * np.log(287/np.sqrt(Z)))
+    X0 = 716.4 * A / (Z*(Z+1) * math.log(287/math.sqrt(Z)))
     return X0
 
 # Bethe-Heitler distribution function
@@ -67,7 +66,7 @@ def bh_distribution(E, E0, Z, A, material_length):
     # Calculate the relative energy
     x = E / E0
     # Calculate the distribution
-    dN = (-np.log(x))**(t/np.log(2)-1)/math.gamma(t/np.log(2))
+    dN = (-math.log(x))**(t/math.log(2)-1)/math.gamma(t/math.log(2))
     return dN 
 
 # Function to calculate the maximum energy loss (or energy transfer)
