@@ -41,6 +41,12 @@ def phi_rad(Z, E0, shield_ind):
         phi = cf * (math.log(183*Z**(-1/3)) + 1/18 - f_coul(Z))
     return phi
 
+# Function to check for the degree of shielding
+def check_phi_rad(Z):
+    # Check if the radiative correction is applicable
+    limit = const.alpha * const.m_e * Z**(1/3)
+    return limit
+
 # Function for the energy loss
 def dE_dx(E0, Z, A, rho, shield_ind):
     # Calculate the energy loss
