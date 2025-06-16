@@ -2,7 +2,7 @@
 
 import numpy as np
 from constants import B, Z0, alpha_c, x, m_light, m_strange
-import scipy as sc
+import scipy as sp
 #from scipy.optimize import minimize_scalar
 
 def energy_terms(R, n, ns, m=m_light, ms=m_strange, S=0, I=0):
@@ -12,7 +12,7 @@ def energy_terms(R, n, ns, m=m_light, ms=m_strange, S=0, I=0):
     return kinetic + bag_energy + delta_em
 
 def minimize_mass(n, ns, S, I, m=m_light, ms=m_strange):
-    result = sc.minimize_scalar(
+    result = sp.minimize_scalar(
         lambda R: energy_terms(R, n, ns, m, ms, S, I),
         bounds=(0.5, 2.0), method='bounded'
     )
