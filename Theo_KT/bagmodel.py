@@ -12,9 +12,9 @@ def energy_terms(R, n, ns, m=m_light, ms=m_strange, S=0, I=0):
     return kinetic + bag_energy + delta_em
 
 def minimize_mass(n, ns, S, I, m=m_light, ms=m_strange):
-    result = sp.minimize_scalar(
+    result = sp.optimize.minimize_scalar(
         lambda R: energy_terms(R, n, ns, m, ms, S, I),
-        bounds=(0.5, 2.0), method='bounded'
+        bounds=(0.1, 2.0), method='bounded'
     )
     R_opt = result.x
     M_min = result.fun
