@@ -3,7 +3,6 @@
 import numpy as np
 from constants import B, Z0, alpha_c, x, m_light, m_strange
 import scipy as sp
-#from scipy.optimize import minimize_scalar
 
 def energy_terms(R, n, ns, m=m_light, ms=m_strange, S=0, I=0):
     kinetic = n * np.sqrt(m**2 + (x / R)**2) + ns * np.sqrt(ms**2 + (x / R)**2)
