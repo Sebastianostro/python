@@ -1,5 +1,7 @@
 # constants.py
 
+# general factor to connect MeV to fm
+hquerfm = 197.327  # MeV*fm
 # Default parameter values (can be updated or fitted later)
 B = 0.145  # GeV^4 (example from MIT paper)
 Z0 = 1.84  # dimensionless
